@@ -81,175 +81,177 @@ class _PerfilState extends State<Perfil> {
       height: height,
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            SizedBox(
-              width: 140,
-              height: 140,
-              child: Stack(
-                children: [
-                  Container(
-                    width: 140,
-                    height: 140,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadiusGeometry.circular(999),
-                      child: img != null
-                          ? Image.file(img!, fit: BoxFit.cover)
-                          : Image.asset(
-                              'assets/perfil.jpeg',
-                              fit: BoxFit.cover,
-                            ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                width: 140,
+                height: 140,
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 140,
+                      height: 140,
                       decoration: BoxDecoration(
-                        color: Cores.azulEscuro,
                         borderRadius: BorderRadius.circular(999),
                       ),
-                      child: IconButton(
-                        onPressed: () => modal(),
-                        icon: Icon(Icons.camera_alt, color: Colors.white),
+                      child: ClipRRect(
+                        borderRadius: BorderRadiusGeometry.circular(999),
+                        child: img != null
+                            ? Image.file(img!, fit: BoxFit.cover)
+                            : Image.asset(
+                                'assets/perfil.jpeg',
+                                fit: BoxFit.cover,
+                              ),
                       ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Cores.azulEscuro,
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: IconButton(
+                          onPressed: () => modal(),
+                          icon: Icon(Icons.camera_alt, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                'Renan Gabriel',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Cores.preto,
+                ),
+              ),
+              Text(
+                'renan@gmail.com',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Cores.preto,
+                ),
+              ),
+              Container(height: 16),
+
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(width * .5, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadiusGeometry.circular(5),
+                  ),
+                  backgroundColor: Cores.azulEscuro,
+                ),
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/login',
+                    (route) => false,
+                  );
+                },
+                icon: Icon(Icons.edit, color: Colors.white),
+                label: Text(
+                  App.palavras[5],
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              Container(height: 16),
+              Row(
+                children: [
+                  Text(
+                    App.palavras[6],
+                    style: TextStyle(
+                      color: Cores.preto,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
-            ),
-            Text(
-              'Renan Gabriel',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Cores.preto,
-              ),
-            ),
-            Text(
-              'renan@gmail.com',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                color: Cores.preto,
-              ),
-            ),
-            Container(height: 16),
-
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size(width * .5, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.circular(5),
-                ),
-                backgroundColor: Cores.azulEscuro,
-              ),
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  '/login',
-                  (route) => false,
-                );
-              },
-              icon: Icon(Icons.edit, color: Colors.white),
-              label: Text(
-                App.palavras[5],
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-            Container(height: 16),
-            Row(
-              children: [
-                Text(
-                  App.palavras[6],
-                  style: TextStyle(
-                    color: Cores.preto,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Container(height: 8),
-            for (var opcao in opcoes)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [BoxShadow(color: Cores.preto, blurRadius: 5)],
-                    color: Cores.branco,
-                  ),
-                  child: ListTile(
-                    leading: Icon(opcao['icon'], color: Cores.preto),
-                    title: Text(
-                      opcao['txt'],
-                      style: TextStyle(color: Cores.preto),
+              Container(height: 8),
+              for (var opcao in opcoes)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(6, 10, 6, 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [BoxShadow(color: Cores.preto, blurRadius: 5)],
+                      color: Cores.branco,
                     ),
-                    trailing: opcao['value'] == null
-                        ? Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: Cores.preto,
-                          )
-                        : Switch(
-                            value: opcao['value'],
-                            onChanged: (value) {
-                              opcao['value'] = !opcao['value'];
+                    child: ListTile(
+                      leading: Icon(opcao['icon'], color: Cores.preto),
+                      title: Text(
+                        opcao['txt'],
+                        style: TextStyle(color: Cores.preto),
+                      ),
+                      trailing: opcao['value'] == null
+                          ? Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Cores.preto,
+                            )
+                          : Switch(
+                              value: opcao['value'],
+                              onChanged: (value) {
+                                opcao['value'] = !opcao['value'];
 
-                              if (opcao['icon'] == Icons.dark_mode) {
-                                App.escuro = opcao['value'];
+                                if (opcao['icon'] == Icons.dark_mode) {
+                                  App.escuro = opcao['value'];
 
-                                if (App.escuro) {
-                                  Cores.branco = Color(0xFF101010);
-                                  Cores.preto = Color(0xFFFCFCFC);
-                                } else {
-                                  Cores.branco = Color(0xFFFCFCFC);
-                                  Cores.preto = Color(0xFF101010);
+                                  if (App.escuro) {
+                                    Cores.branco = Color(0xFF101010);
+                                    Cores.preto = Color(0xFFFCFCFC);
+                                  } else {
+                                    Cores.branco = Color(0xFFFCFCFC);
+                                    Cores.preto = Color(0xFF101010);
+                                  }
+
+                                  App.page.value--;
+                                  App.page.value++;
                                 }
 
-                                App.page.value--;
-                                App.page.value++;
-                              }
+                                setState(() {});
+                              },
+                            ),
+                    ),
+                  ),
+                ),
 
-                              setState(() {});
-                            },
-                          ),
+              Container(height: 16),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(width, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadiusGeometry.circular(5),
+                  ),
+                  backgroundColor: Cores.azulEscuro,
+                ),
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/login',
+                    (route) => false,
+                  );
+                },
+                icon: Icon(Icons.logout, color: Colors.white),
+                label: Text(
+                  App.palavras[7],
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
-
-            Container(height: 16),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size(width, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.circular(5),
-                ),
-                backgroundColor: Cores.azulEscuro,
-              ),
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  '/login',
-                  (route) => false,
-                );
-              },
-              icon: Icon(Icons.logout, color: Colors.white),
-              label: Text(
-                App.palavras[7],
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

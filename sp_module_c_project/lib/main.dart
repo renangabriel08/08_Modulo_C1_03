@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sp_module_c_project/pages/detalhes.dart';
 import 'package:sp_module_c_project/pages/home.dart';
 import 'package:sp_module_c_project/pages/login.dart';
@@ -14,6 +15,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
